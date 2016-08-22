@@ -3,12 +3,23 @@ package com.android.focus.managers;
 import android.content.SharedPreferences;
 
 import com.android.focus.FocusApp;
+import com.android.focus.model.Panel;
 import com.android.focus.model.User;
+import com.android.focus.utils.DateUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.List;
 
 import static com.android.focus.model.User.EMAIL;
 import static com.android.focus.model.User.ID;
 import static com.android.focus.model.User.NOMBRE;
 import static com.android.focus.model.User.USERNAME;
+import static com.android.focus.network.APIConstants.PANELS;
 
 public class UserPreferencesManager {
 
@@ -50,6 +61,20 @@ public class UserPreferencesManager {
         remove(USERNAME);
         remove(EMAIL);
         remove(NOMBRE);
+    }
+    // endregion
+
+    // region Data
+    public static void initData(JSONObject response) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat(DateUtils.DATE_FORMAT)
+                .create();
+
+        // Set panels.
+        JSONArray panelsArray = response.optJSONArray(PANELS);
+        List<Panel> panels = gson.fromJson(panelsArray.toString(), new TypeToken<List<Panel>>() {
+        }.getType());
+        Panel.setUserPaneles(panels);
     }
     // endregion
 

@@ -19,8 +19,8 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-import com.android.focus.LoadingActivity;
 import com.android.focus.R;
+import com.android.focus.main.MainActivity;
 import com.android.focus.managers.UserPreferencesManager;
 import com.android.focus.model.User;
 import com.android.focus.network.HttpResponseHandler;
@@ -218,15 +218,16 @@ public class AuthenticationFragment extends Fragment implements OnClickListener,
                     return;
                 }
 
-                // Save user.
+                // Save user and init data.
                 User user = (new Gson()).fromJson(response.toString(), User.class);
                 User.setCurrentUser(user);
                 UserPreferencesManager.saveCurrentUser(user);
+                UserPreferencesManager.initData(response);
 
                 // TODO: Register device token.
 
-                // Close any authentication activity before starting loading activity.
-                Intent intent = new Intent(activity, LoadingActivity.class);
+                // Close any authentication activity before starting main activity.
+                Intent intent = new Intent(activity, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
