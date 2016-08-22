@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Font -->
+    <dimen name="font_16sp">16sp</dimen>
+    <dimen name="font_20sp">20sp</dimen>
+    <dimen name="font_24sp">24sp</dimen>
+    <dimen name="font_30sp">30sp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="toolbar_padding_right">6dp</dimen>
+
+    <!-- Divider -->
+    <dimen name="divider_height">1dp</dimen>
+
+    <!-- TextView -->
+    <dimen name="text_view_height">56dp</dimen>
+    <dimen name="text_view_height_extended">72dp</dimen>
+
+    <!-- EditText -->
+    <dimen name="edit_text_height">56dp</dimen>
+
+    <!-- Button -->
+    <dimen name="button_height">64dp</dimen>
+
+    <!-- CardView -->
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_layout_margin_bottom">2dp</dimen>
+    <dimen name="card_layout_margin_top">2dp</dimen>
+</resources>

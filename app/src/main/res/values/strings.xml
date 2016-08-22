@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Focus</string>
+
+    <!-- Authentication -->
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_in">Iniciar Sesión</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="sign_in_error">Usuario o contraseña incorrectos</string>
+
+    <!-- Loading -->
+    <string name="loading_data">Cargando Datos</string>
+
+    <!-- Toasts -->
+    <string name="no_internet">Sin Conexión A Internet</string>
+
+    <!-- Helpers -->
+    <string name="image_description">Image</string>
 </resources>
