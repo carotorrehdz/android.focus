@@ -11,6 +11,18 @@
     <!-- Loading -->
     <string name="loading_data">Cargando Datos</string>
 
+    <!-- Panels -->
+    <string name="panels">Paneles</string>
+    <string name="startDate">Fecha de Inicio:\u0020</string>
+    <string name="endDate">Fecha de Fin:\u0020</string>
+
+    <!-- Surveys -->
+    <string name="surveys">Encuestas</string>
+
+    <!-- Profile -->
+    <string name="profile">Profile</string>
+    <string name="sign_out">Cerrar Sesión</string>
+
     <!-- Toasts -->
     <string name="no_internet">Sin Conexión A Internet</string>
 
