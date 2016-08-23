@@ -136,7 +136,7 @@ public class AuthenticationFragment extends Fragment implements OnClickListener,
     // region UI methods
     private void showError(String error) {
         enableBack = true;
-        loader.setVisibility(View.VISIBLE);
+        loader.setVisibility(View.GONE);
         Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
     }
     // endregion
