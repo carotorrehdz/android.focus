@@ -1,5 +1,6 @@
 package com.android.focus.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,6 +9,13 @@ import java.util.List;
 
 public class Pregunta {
 
+    public static final int TEXT_ANSWER = 1;
+    public static final int SINGLE_OPTION = 2;
+    public static final int MULTIPLE_OPTION = 3;
+    public static final int ORDERING = 4;
+    public static final int MAX_OPTIONS = 10;
+
+    private boolean contestada;
     private int id;
     private int tipo;
     private int numPregunta;
@@ -16,6 +24,7 @@ public class Pregunta {
     private String imagen;
     private List<String> opciones;
     private String respuesta;
+    private List<String> respuestasSeleccionadas;
 
     // region Getters and setters
     public int getId() {
@@ -80,6 +89,24 @@ public class Pregunta {
 
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
+    }
+
+    public List<String> getRespuestasSeleccionadas() {
+        if (respuestasSeleccionadas == null) {
+            respuestasSeleccionadas = new ArrayList<>();
+        }
+
+        return respuestasSeleccionadas;
+    }
+
+    public void setRespuestaSeleccionada(String respuestaSeleccionada) {
+        List<String> respuestasSeleccionadas = getRespuestasSeleccionadas();
+        respuestasSeleccionadas.add(respuestaSeleccionada);
+    }
+
+    public void removeRespuestaSeleccionada(String respuestaSeleccionada) {
+        List<String> respuestasSeleccionadas = getRespuestasSeleccionadas();
+        respuestasSeleccionadas.remove(respuestaSeleccionada);
     }
     // endregion
 }

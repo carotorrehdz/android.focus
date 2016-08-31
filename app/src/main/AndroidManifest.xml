@@ -39,5 +39,10 @@
         <activity
             android:name=".paneles.activities.EncuestasActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".paneles.activities.EncuestaActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

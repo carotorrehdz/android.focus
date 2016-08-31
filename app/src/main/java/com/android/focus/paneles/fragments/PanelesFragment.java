@@ -19,7 +19,7 @@ import com.android.focus.utils.DateUtils;
 
 import java.util.List;
 
-import static com.android.focus.paneles.activities.EncuestasActivity.EXTRA_PANEL_INDEX;
+import static com.android.focus.paneles.activities.EncuestasActivity.EXTRA_PANEL_ID;
 
 public class PanelesFragment extends Fragment {
 
@@ -82,7 +82,7 @@ public class PanelesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EncuestasActivity.class);
-                intent.putExtra(EXTRA_PANEL_INDEX, panels.indexOf(panel));
+                intent.putExtra(EXTRA_PANEL_ID, panel.getId());
                 startActivity(intent);
             }
         });

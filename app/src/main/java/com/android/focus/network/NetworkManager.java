@@ -17,6 +17,7 @@ import static com.android.focus.network.APIConstants.ACTION;
 import static com.android.focus.network.APIConstants.GET_DATA;
 import static com.android.focus.network.APIConstants.SAVE_ANSWERS;
 import static com.android.focus.network.APIConstants.SIGN_IN;
+import static com.android.focus.network.APIConstants.START_SURVEY;
 
 /**
  * Manager to perform network operations.
@@ -35,6 +36,10 @@ public class NetworkManager {
         post(GET_DATA, params, responseHandler);
     }
 
+    public static void startSurvey(RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        post(START_SURVEY, params, responseHandler);
+    }
+
     public static void saveAnswers(RequestParams params, AsyncHttpResponseHandler responseHandler) {
         post(SAVE_ANSWERS, params, responseHandler);
     }
@@ -47,11 +52,15 @@ public class NetworkManager {
     // endregion
 
     // region Helper methods
-    public static boolean isNetworkUnavailable(Activity activity) {
+    public static boolean isNetworkUnavailable() {
         ConnectivityManager manager = (ConnectivityManager) FocusApp.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = manager.getActiveNetworkInfo();
 
-        boolean isNetworkUnavailable = (activeNetworkInfo == null || !activeNetworkInfo.isConnectedOrConnecting());
+        return (activeNetworkInfo == null || !activeNetworkInfo.isConnectedOrConnecting());
+    }
+
+    public static boolean isNetworkUnavailable(Activity activity) {
+        boolean isNetworkUnavailable = isNetworkUnavailable();
 
         if (isNetworkUnavailable) {
             Toast.makeText(activity, UIUtils.getString(R.string.no_internet), Toast.LENGTH_SHORT).show();

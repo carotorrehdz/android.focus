@@ -1,7 +1,9 @@
 package com.android.focus.utils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -43,5 +45,46 @@ public class UIUtils {
      */
     public static String getString(int resourceId) {
         return FocusApp.getAppResources().getString(resourceId);
+    }
+
+    /**
+     * Show alert dialog.
+     */
+    public static void showAlertDialog(int title, int message, Activity activity) {
+        showDialog(title, message, android.R.string.ok, false, activity, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public static void showAlertDialog(int title, int message, Activity activity, DialogInterface.OnClickListener positiveButtonListener) {
+        showDialog(title, message, android.R.string.ok, false, activity, positiveButtonListener);
+    }
+
+    /**
+     * Show confirmation dialog
+     */
+    public static void showConfirmationDialog(int title, int message, int positiveButton, Activity activity, final DialogInterface.OnClickListener positiveButtonListener) {
+        showDialog(title, message, positiveButton, true, activity, positiveButtonListener);
+    }
+
+    private static void showDialog(int title, int message, int positiveButton, boolean cancelable, Activity activity, final DialogInterface.OnClickListener positiveButtonListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(positiveButton, positiveButtonListener);
+
+        if (cancelable) {
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+
+        builder.show();
     }
 }

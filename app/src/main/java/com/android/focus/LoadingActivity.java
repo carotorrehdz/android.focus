@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.focus.main.MainActivity;
 import com.android.focus.managers.UserPreferencesManager;
@@ -19,12 +25,57 @@ import cz.msebera.android.httpclient.Header;
 
 public class LoadingActivity extends AppCompatActivity {
 
+    private CardView tryAgainCard;
+    private ProgressBar progressBar;
+    private TextView title;
+    private TextView message;
+
     // region Activity lifecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         super.setContentView(R.layout.activity_loading);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        title = (TextView) findViewById(R.id.txt_title);
+        message = (TextView) findViewById(R.id.txt_message);
+        tryAgainCard = (CardView) findViewById(R.id.card_try_again);
+        Button tryAgainButton = (Button) findViewById(R.id.btn_try_again);
+
+        if (tryAgainButton != null) {
+            tryAgainButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fetchData();
+                }
+            });
+        }
+
+        fetchData();
+    }
+    // endregion
+
+    // region UI methods
+    private void updateView(int titleResourceId, int messageResourceId) {
+        progressBar.setVisibility(View.GONE);
+        message.setVisibility(View.VISIBLE);
+        tryAgainCard.setVisibility(View.VISIBLE);
+        title.setText(getString(titleResourceId));
+        message.setText(getString(messageResourceId));
+    }
+    // endregion
+
+    // private void Helper methods
+    private void fetchData() {
+        title.setText(getString(R.string.loading_data));
+        progressBar.setVisibility(View.VISIBLE);
+        message.setVisibility(View.GONE);
+        tryAgainCard.setVisibility(View.GONE);
+
+        if (NetworkManager.isNetworkUnavailable()) {
+            updateView(R.string.no_internet, R.string.no_internet_message);
+        }
 
         final Activity activity = this;
         RequestParams params = new RequestParams();
@@ -44,7 +95,7 @@ public class LoadingActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable throwable) {
-
+                updateView(R.string.server_unavailable_title, R.string.server_unavailable_message);
             }
         });
     }

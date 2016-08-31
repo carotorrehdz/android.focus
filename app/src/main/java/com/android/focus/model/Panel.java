@@ -67,5 +67,13 @@ public class Panel {
     public static List<Panel> getUserPaneles() {
         return userPanels;
     }
+
+    public static String getActivePanels() {
+        return "1";
+    }
+
+    public static String getPendingSurveys() {
+        return "0";
+    }
     // endregion
 }

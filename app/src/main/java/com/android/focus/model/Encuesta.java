@@ -1,5 +1,6 @@
 package com.android.focus.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,7 +69,27 @@ public class Encuesta {
 
     // region Utility methods
     public static List<Encuesta> getUserEncuestas(int panelId) {
-        return Panel.getUserPaneles().get(panelId).getEncuestas();
+        List<Panel> userPaneles = Panel.getUserPaneles();
+
+        for (Panel userPanel : userPaneles) {
+            if (userPanel.getId() == panelId) {
+                return userPanel.getEncuestas();
+            }
+        }
+
+        return new ArrayList<>();
+    }
+
+    public static List<Pregunta> getPreguntas(int panelId, int encuestaId) {
+        List<Encuesta> userEncuestas = getUserEncuestas(panelId);
+
+        for (Encuesta userEncuesta : userEncuestas) {
+            if (userEncuesta.getId() == encuestaId) {
+                return userEncuesta.getPreguntas();
+            }
+        }
+
+        return new ArrayList<>();
     }
     // endregion
 }
