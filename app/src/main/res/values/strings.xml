@@ -38,6 +38,8 @@
     <string name="no_internet">Sin Conexión A Internet</string>
 
     <!-- Dialogs -->
+    <string name="no_surveys_title">No Hay Encuestas</string>
+    <string name="no_surveys_message">Este panel aún no cuenta con encuestas. Por favor, espere a que una encuesta sea habilitada.</string>
     <string name="answered_title">Encuesta Contestada</string>
     <string name="answered_message">Esta encuensta ya ha sido contestada. Solo se puede contestar una vez.</string>
     <string name="no_answered_title">Atención</string>

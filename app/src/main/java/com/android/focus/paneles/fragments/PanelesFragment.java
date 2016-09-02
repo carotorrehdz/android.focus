@@ -1,5 +1,6 @@
 package com.android.focus.paneles.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.android.focus.R;
 import com.android.focus.model.Panel;
 import com.android.focus.paneles.activities.EncuestasActivity;
 import com.android.focus.utils.DateUtils;
+import com.android.focus.utils.UIUtils;
 
 import java.util.List;
 
@@ -24,7 +26,6 @@ import static com.android.focus.paneles.activities.EncuestasActivity.EXTRA_PANEL
 public class PanelesFragment extends Fragment {
 
     private LinearLayout panelsList;
-    private List<Panel> panels;
 
     // region Factory methods
 
@@ -59,7 +60,7 @@ public class PanelesFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        panels = Panel.getUserPaneles();
+        List<Panel> panels = Panel.getUserPaneles();
         panelsList.removeAllViews();
 
         for (Panel panel : panels) {
@@ -70,6 +71,7 @@ public class PanelesFragment extends Fragment {
 
     // region UI methods
     private View createViewForPanel(final Panel panel) {
+        final Activity activity = getActivity();
         View view = View.inflate(FocusApp.getContext(), R.layout.card_detail, null);
         TextView title = (TextView) view.findViewById(R.id.txt_title);
         title.setText(panel.getNombre());
@@ -78,16 +80,35 @@ public class PanelesFragment extends Fragment {
         TextView endDate = (TextView) view.findViewById(R.id.txt_end_date);
         endDate.setText(DateUtils.dateFormat(panel.getFechaFin()));
 
-        view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EncuestasActivity.class);
-                intent.putExtra(EXTRA_PANEL_ID, panel.getId());
-                startActivity(intent);
-            }
-        });
+        if (panel.getEncuestas().isEmpty()) {
+            view.setOnClickListener(showNoSurveysDialog(activity));
+        } else {
+            view.setOnClickListener(getViewPanelListener(panel.getId(), activity));
+        }
 
         return view;
+    }
+    // endregion
+
+    // region Helper methods
+    private OnClickListener getViewPanelListener(final int panelId, final Activity activity) {
+        return new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, EncuestasActivity.class);
+                intent.putExtra(EXTRA_PANEL_ID, panelId);
+                startActivity(intent);
+            }
+        };
+    }
+
+    private OnClickListener showNoSurveysDialog(final Activity activity) {
+        return new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UIUtils.showAlertDialog(R.string.no_surveys_title, R.string.no_surveys_message, activity);
+            }
+        };
     }
     // endregion
 }
