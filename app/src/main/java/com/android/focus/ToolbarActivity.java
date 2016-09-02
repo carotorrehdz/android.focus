@@ -8,24 +8,21 @@ import android.view.MenuItem;
 
 public class ToolbarActivity extends AppCompatActivity {
 
+    protected int layoutId = R.layout.activity_toolbar;
     protected String title;
+    private boolean displayHomeAsUpEnabled;
 
     // region Activity lifecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        super.setContentView(R.layout.activity_toolbar);
+        super.setContentView(layoutId);
 
         Toolbar toolbar = ((Toolbar) findViewById(R.id.toolbar));
         setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setTitle(title);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        displayHomeAsUpEnabled = (layoutId == R.layout.activity_toolbar);
+        setTitle(title);
     }
     // endregion
 
@@ -40,6 +37,17 @@ public class ToolbarActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    // endregion
+
+    // region UI methods
+    protected void setTitle(String title) {
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+            actionBar.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled);
+        }
     }
     // endregion
 }

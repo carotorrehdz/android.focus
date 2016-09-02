@@ -12,46 +12,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.android.focus.R;
+import com.android.focus.ToolbarActivity;
 import com.android.focus.paneles.fragments.PanelesFragment;
 import com.android.focus.perfil.PerfilFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnPageChangeListener {
+public class MainActivity extends ToolbarActivity implements OnPageChangeListener {
 
-    private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
 
     // region Activity lifecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        layoutId = R.layout.activity_main;
+        title = getString(R.string.panels);
         super.onCreate(savedInstanceState);
-
-        super.setContentView(R.layout.activity_focus);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle(getString(R.string.panels));
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         setUpViewPager();
 
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
         if (tabLayout != null) {
             tabLayout.setupWithViewPager(viewPager);
-        }
-    }
-    // endregion
-
-    // region UI methods
-    private void setTitle(String title) {
-        ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setTitle(title);
         }
     }
     // endregion
