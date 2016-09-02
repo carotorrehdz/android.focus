@@ -115,9 +115,8 @@ public class EncuestasFragment extends Fragment {
         title.setText(encuesta.getNombre());
         TextView preguntas = (TextView) view.findViewById(R.id.txt_preguntas);
         preguntas.setText(getResources().getQuantityString(R.plurals.preguntas_count, encuesta.getPreguntas().size(), encuesta.getPreguntas().size()));
-        preguntas.setVisibility(View.VISIBLE);
-        ImageView checkMark = (ImageView) view.findViewById(R.id.img_check_mark);
-        checkMark.setVisibility(encuesta.isContestada() ? View.VISIBLE : View.GONE);
+        ImageView image = (ImageView) view.findViewById(R.id.image);
+        image.setImageResource(encuesta.isContestada() ? R.drawable.ic_check_mark : R.drawable.ic_arrow);
         TextView startDate = (TextView) view.findViewById(R.id.txt_start_date);
         startDate.setText(DateUtils.dateFormat(encuesta.getFechaInicio()));
         TextView endDate = (TextView) view.findViewById(R.id.txt_end_date);

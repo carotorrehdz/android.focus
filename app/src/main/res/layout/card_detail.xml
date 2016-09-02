@@ -24,13 +24,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/img_check_mark"
+            android:id="@+id/image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="16dp"
             android:contentDescription="@string/image_description"
-            android:src="@drawable/ic_check_mark"
-            android:visibility="gone"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_title" />
 
@@ -43,7 +41,7 @@
             android:textColor="@color/bluePrimary"
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/img_check_mark"
+            app:layout_constraintRight_toLeftOf="@id/image"
             app:layout_constraintTop_toBottomOf="@id/txt_title" />
 
         <TextView

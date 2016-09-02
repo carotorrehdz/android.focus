@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -75,6 +76,7 @@ public class PanelesFragment extends Fragment {
         View view = View.inflate(FocusApp.getContext(), R.layout.card_detail, null);
         TextView title = (TextView) view.findViewById(R.id.txt_title);
         title.setText(panel.getNombre());
+        ImageView image = (ImageView) view.findViewById(R.id.image);
         TextView startDate = (TextView) view.findViewById(R.id.txt_start_date);
         startDate.setText(DateUtils.dateFormat(panel.getFechaInicio()));
         TextView endDate = (TextView) view.findViewById(R.id.txt_end_date);
@@ -83,6 +85,7 @@ public class PanelesFragment extends Fragment {
         if (panel.getEncuestas().isEmpty()) {
             view.setOnClickListener(showNoSurveysDialog(activity));
         } else {
+            image.setImageResource(R.drawable.ic_arrow);
             view.setOnClickListener(getViewPanelListener(panel.getId(), activity));
         }
 
