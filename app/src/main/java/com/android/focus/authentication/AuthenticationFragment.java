@@ -222,7 +222,6 @@ public class AuthenticationFragment extends Fragment implements OnClickListener,
                 User user = (new Gson()).fromJson(response.toString(), User.class);
                 User.setCurrentUser(user);
                 UserPreferencesManager.saveCurrentUser(user);
-                UserPreferencesManager.initData(response);
 
                 // TODO: Register device token.
 
