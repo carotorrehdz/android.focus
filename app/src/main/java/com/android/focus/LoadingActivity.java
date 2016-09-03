@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class LoadingActivity extends AppCompatActivity {
+public class LoadingActivity extends ToolbarActivity {
 
     private CardView tryAgainCard;
     private ProgressBar progressBar;
@@ -33,9 +33,8 @@ public class LoadingActivity extends AppCompatActivity {
     // region Activity lifecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        layoutId = R.layout.activity_loading;
         super.onCreate(savedInstanceState);
-
-        super.setContentView(R.layout.activity_loading);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         title = (TextView) findViewById(R.id.txt_title);

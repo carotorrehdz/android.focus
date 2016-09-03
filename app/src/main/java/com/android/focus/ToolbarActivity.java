@@ -19,6 +19,10 @@ public class ToolbarActivity extends AppCompatActivity {
 
         super.setContentView(layoutId);
 
+        if (layoutId == R.layout.activity_loading) {
+            return;
+        }
+
         Toolbar toolbar = ((Toolbar) findViewById(R.id.toolbar));
         setSupportActionBar(toolbar);
         displayHomeAsUpEnabled = (layoutId == R.layout.activity_toolbar);
