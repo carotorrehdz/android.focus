@@ -17,6 +17,7 @@
     <string name="panels">Paneles</string>
     <string name="startDate">Fecha de Inicio:\u0020</string>
     <string name="endDate">Fecha de Fin:\u0020</string>
+    <string name="no_active_panels">Sin Paneles Activos\u0020</string>
 
     <!-- Surveys -->
     <string name="survey">Encuesta</string>

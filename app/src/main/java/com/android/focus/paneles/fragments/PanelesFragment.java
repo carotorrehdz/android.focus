@@ -27,6 +27,7 @@ import static com.android.focus.paneles.activities.EncuestasActivity.EXTRA_PANEL
 public class PanelesFragment extends Fragment {
 
     private LinearLayout panelsList;
+    private TextView noActivePanels;
 
     // region Factory methods
 
@@ -53,6 +54,7 @@ public class PanelesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_paneles, container, false);
 
         panelsList = (LinearLayout) view.findViewById(R.id.list_panels);
+        noActivePanels = (TextView) view.findViewById(R.id.txt_no_active_panels);
 
         return view;
     }
@@ -61,16 +63,24 @@ public class PanelesFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        List<Panel> panels = Panel.getUserPaneles();
+        updateView(Panel.getUserPaneles());
+    }
+    // endregion
+
+    // region UI methods
+    private void updateView(List<Panel> panels) {
         panelsList.removeAllViews();
+
+        if (panels.isEmpty()) {
+            noActivePanels.setVisibility(View.VISIBLE);
+            return;
+        }
 
         for (Panel panel : panels) {
             panelsList.addView(createViewForPanel(panel));
         }
     }
-    // endregion
 
-    // region UI methods
     private View createViewForPanel(final Panel panel) {
         final Activity activity = getActivity();
         View view = View.inflate(FocusApp.getContext(), R.layout.card_detail, null);
