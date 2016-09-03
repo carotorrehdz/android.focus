@@ -14,6 +14,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        super.setContentView(R.layout.activity_splash);
+
         Class clazz = UserPreferencesManager.hasCurrentUser() ? LoadingActivity.class : AuthenticationActivity.class;
         Intent intent = new Intent(this, clazz);
         startActivity(intent);

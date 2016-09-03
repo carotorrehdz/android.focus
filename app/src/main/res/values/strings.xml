@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Focus</string>
 
+    <!-- Splash -->
+    <string name="copyright">Copyright © 2016 Focus Consulting Group, SA. de C.V.</string>
+
     <!-- Authentication -->
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
